@@ -11,7 +11,7 @@ public class Boid : MonoBehaviour {
     public Vector3 position;
     [HideInInspector]
     public Vector3 forward;
-    Vector3 velocity;
+    public Vector3 velocity;
 
     // To update:
     Vector3 acceleration;

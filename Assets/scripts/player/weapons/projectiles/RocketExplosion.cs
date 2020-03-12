@@ -29,7 +29,10 @@ public class RocketExplosion : MonoBehaviour
                 Vector3 forceDir = Vector3.Normalize(owner.transform.position - transform.position);
 
                 owner.GetComponent<Rigidbody>().AddForce(forceDir * forceMult * forceConstant, ForceMode.VelocityChange);
-                //owner.GetComponent<Rigidbody>().AddExplosionForce(25f, transform.position, radius, 1f, ForceMode.VelocityChange);
+            }
+            else if (hitColliders[i].gameObject.GetComponent<Boid>() != null)
+            {
+                hitColliders[i].gameObject.GetComponent<Boid>().velocity += Vector3.Normalize(hitColliders[i].transform.position - transform.position) * forceConstant * 2f;
             }
         }
     }

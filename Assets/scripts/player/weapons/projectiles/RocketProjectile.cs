@@ -11,16 +11,19 @@ public class RocketProjectile : MonoBehaviour
     {
         Destroy(this.gameObject, 10f);
     }
-    private void OnCollisionEnter(Collision other)
+
+    void OnDestroy()
     {
         GameObject explosion = Instantiate(rocketExplosion, transform.position, Quaternion.identity);
         explosion.GetComponent<RocketExplosion>().owner = owner;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
         Destroy(this.gameObject);
     }
     private void OnTriggerEnter(Collider other)
     {
-        GameObject explosion = Instantiate(rocketExplosion, transform.position, Quaternion.identity);
-        explosion.GetComponent<RocketExplosion>().owner = owner;
         Destroy(this.gameObject);
     }
 }
