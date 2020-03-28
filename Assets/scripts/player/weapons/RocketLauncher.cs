@@ -10,7 +10,7 @@ public class RocketLauncher : MonoBehaviour, IWeapon
     public int startingAmmo {get; set;} = 15;
     public int maxAmmo {get; set;} = 50;
     public int ammo {get; set;}
-    public float fireDelay {get; set;} = 1.5f;
+    public float fireDelay {get; set;} = 1f;
     public GameObject owner {get; set;}
     public GameObject ownerCam {get; set;}
 

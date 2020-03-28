@@ -28,6 +28,10 @@ public class GrenadeProjectile : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         rb.velocity = new Vector3( rb.velocity.x * 0.5f, rb.velocity.y, rb.velocity.z * 0.5f);
+        if(other.collider.gameObject.layer == LayerMask.NameToLayer("enemy"))
+        {
+            Destroy(this.gameObject);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {

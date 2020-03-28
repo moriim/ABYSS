@@ -51,6 +51,7 @@
      <Compile Include="Assets\scripts\enemies\boids\BoidManager.cs" />
      <Compile Include="Assets\scripts\enemies\boids\BoidSettings.cs" />
      <Compile Include="Assets\scripts\enemies\boids\Spawner.cs" />
+     <Compile Include="Assets\scripts\enemies\knights\Knight.cs" />
      <Compile Include="Assets\scripts\player\Movement.cs" />
      <Compile Include="Assets\scripts\player\PlayerInput.cs" />
      <Compile Include="Assets\scripts\player\PlayerUI.cs" />
