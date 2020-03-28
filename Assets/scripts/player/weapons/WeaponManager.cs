@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    public List<Weapon> weapons;
-    public Weapon equippedWeapon;
+    List<IWeapon> weapons;
+    IWeapon equippedWeapon;
     private int equippedWeaponIndex;
     public int startingWeaponIndex;
     public GameObject playerCam;
 
     void Awake()
     {
+        weapons = new List<IWeapon>();
         playerCam = transform.Find("camera").gameObject;
-        weapons.Add(transform.Find("camera/weapons/rocketlauncher").GetComponent<RocketLauncher>());
+        weapons.Add(transform.Find("camera/weapons/rocketlauncher").GetComponent<IWeapon>());
         equippedWeaponIndex = startingWeaponIndex;
         equippedWeapon = weapons[equippedWeaponIndex];
-        foreach(Weapon w in weapons)
+        foreach(IWeapon w in weapons)
         {
             w.owner = transform.root.gameObject;
             w.ownerCam = playerCam;
@@ -60,13 +61,13 @@ public class WeaponManager : MonoBehaviour
         equippedWeapon.Equip();
     }
 
-    public void FirePrimary()
+    public void PrimaryDown()
     {
-        equippedWeapon.Primary();
+        equippedWeapon.OnPrimaryDown();
     }
 
-    public void FireSecondary()
+    public void SecondaryDown()
     {
-        equippedWeapon.Secondary();
+        equippedWeapon.OnSecondaryDown();
     }
 }

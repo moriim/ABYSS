@@ -112,6 +112,9 @@ MonoBehaviour:
   col: {fileID: -4554806956733387235}
   rb: {fileID: 2882143907153776213}
   owner: {fileID: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!54 &2882143907153776213
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class GrenadeProjectile : MonoBehaviour
     public SphereCollider col;
     public Rigidbody rb;
     public GameObject owner;
+    public LayerMask groundMask;
     private float gravity = -0.75f;
 
     void Awake()
@@ -17,6 +18,11 @@ public class GrenadeProjectile : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(Mathf.Abs(rb.velocity.y) < 5 && Physics.Raycast(transform.position, -Vector3.up, col.bounds.extents.y + 0.01f, groundMask))
+        {
+            rb.velocity = new Vector3(0,0,0);
+            gravity = 0f;
+        }
         rb.velocity += new Vector3(0, gravity, 0);
     }
     private void OnCollisionEnter(Collision other)

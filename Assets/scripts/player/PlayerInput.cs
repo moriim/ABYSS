@@ -41,13 +41,9 @@ public class PlayerInput : MonoBehaviour
         }
         move.inputDir = Vector3.Normalize(transform.TransformVector(inputVector));
 
-        if(Input.GetKey(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && !move.isJumping)
         {
             move.isJumping = true;
-        }
-        else
-        {
-            move.isJumping = false;
         }
 
         if(Input.GetKey(KeyCode.RightArrow))
@@ -70,11 +66,11 @@ public class PlayerInput : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            weap.FirePrimary();
+            weap.PrimaryDown();
         }
         else if(Input.GetKeyDown(KeyCode.Mouse1))
         {
-            weap.FireSecondary();
+            weap.SecondaryDown();
         }
     }
 }

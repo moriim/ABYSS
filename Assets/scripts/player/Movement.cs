@@ -14,8 +14,10 @@ public class Movement : MonoBehaviour
     private float groundAccelerate = 200;
     private float maxVelocityAir = 50;
     private float maxVelocityGround = 50;
-    private float jumpVelocity = 7;
+    private float jumpVelocity = 15;
     private float maxFallSpeed = -30;
+    private int framesSinceJumpPressed = 0;
+    private int gracePeriod = 7;
     public LayerMask jumpMask;
 
     private Vector3 Accelerate(Vector3 accelDir, Vector3 prevVelocity, float accelerate, float maxVelocity)
@@ -40,8 +42,16 @@ public class Movement : MonoBehaviour
         }
         Vector3 newVel = new Vector3();
 
-        newVel = isJumping == true ? Accelerate(accelDir, prevVelocity, 0f , maxVelocityGround) 
-                                   : Accelerate(accelDir, prevVelocity, groundAccelerate, maxVelocityGround);
+        if(isJumping)
+        {
+            newVel = Accelerate(accelDir, prevVelocity, 0f , maxVelocityGround);
+        }
+        else
+        {
+            newVel = Accelerate(accelDir, prevVelocity, groundAccelerate, maxVelocityGround);
+        }
+        //newVel = isJumping == true ? Accelerate(accelDir, prevVelocity, 0f , maxVelocityGround) 
+        //                           : Accelerate(accelDir, prevVelocity, groundAccelerate, maxVelocityGround);
         return newVel;
     }
 
@@ -63,13 +73,24 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(isJumping)
+        {
+            if(Physics.Raycast(transform.position, -Vector3.up, col.bounds.extents.y + 0.1f, jumpMask))
+            {
+                rb.velocity = new Vector3(rb.velocity.x,jumpVelocity,rb.velocity.z);
+                isJumping = false;
+                framesSinceJumpPressed = 0;
+            }
+            if(framesSinceJumpPressed > gracePeriod)
+            {
+                isJumping = false;
+                framesSinceJumpPressed = 0;
+            }
+            framesSinceJumpPressed++;
+        }
         if(Physics.Raycast(transform.position, -Vector3.up, col.bounds.extents.y + 0.1f, jumpMask))
         {
             rb.velocity = MoveGround(inputDir, rb.velocity);
-            if(isJumping)
-            {
-                rb.velocity = new Vector3(rb.velocity.x,jumpVelocity,rb.velocity.z);
-            }
         }
         else
         {

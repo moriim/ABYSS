@@ -2,12 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketLauncher : Weapon
+public class RocketLauncher : MonoBehaviour, IWeapon
 {
     public GameObject rocketPrefab;
     public GameObject grenadePrefab;
     
-    public override void Primary()
+    public int startingAmmo {get; set;} = 15;
+    public int maxAmmo {get; set;} = 50;
+    public int ammo {get; set;}
+    public float fireDelay {get; set;} = 1.5f;
+    public GameObject owner {get; set;}
+    public GameObject ownerCam {get; set;}
+
+    public float lastShot {get; set;}
+
+    public void Awake()
+    {
+        lastShot = -fireDelay;
+    }
+    public void Update()
+    {
+
+    }
+    public void OnPrimaryDown()
     {
         if(Time.time > lastShot + fireDelay)
         {
@@ -17,9 +34,11 @@ public class RocketLauncher : Weapon
             lastShot = Time.time;
         }
     }
-        
-    
-    public override void Secondary()
+    public void OnPrimaryUp()
+    {
+
+    }
+    public void OnSecondaryDown()
     {
         if(Time.time > lastShot + fireDelay)
         {
@@ -29,14 +48,17 @@ public class RocketLauncher : Weapon
             lastShot = Time.time;
         }
     }
-
-    public override void Unequip()
+    public void OnSecondaryUp()
     {
 
     }
-    
-    public override void Equip()
+    public void Unequip()
     {
 
     }
+    public void Equip()
+    {
+
+    }
+
 }
