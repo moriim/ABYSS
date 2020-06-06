@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 public class Knight: MonoBehaviour, IDamageable
 {
     public float health {get; set;} = 1500;
@@ -16,6 +17,11 @@ public class Knight: MonoBehaviour, IDamageable
     private float maxVelocityGround = 5;
     private float maxFallSpeed = -30;
     public LayerMask jumpMask;
+
+    public Vector3 lastPos;
+    public Vector3 nextPos;
+    public GameObject player;
+    private NavMeshPath path;
 
     private Vector3 Accelerate(Vector3 accelDir, Vector3 prevVelocity, float accelerate, float maxVelocity)
     {
@@ -71,10 +77,19 @@ public class Knight: MonoBehaviour, IDamageable
         gObj = this.gameObject;
         col = this.GetComponent<CapsuleCollider>();
         rb = this.GetComponent<Rigidbody>();
+        player = GameObject.Find("player");
+        lastPos = transform.position;
+        nextPos = Vector3.zero;
+        path = new NavMeshPath();
+        InvokeRepeating("FindPath", 0f, 1f);
     }
 
     void FixedUpdate()
     {
+        if(nextPos != Vector3.zero)
+        {
+            inputDir = Vector3.Normalize(nextPos - transform.position);
+        }
         if(Physics.Raycast(transform.position, -Vector3.up, col.bounds.extents.y + 0.1f, jumpMask))
         {
             rb.velocity = MoveGround(inputDir, rb.velocity);
@@ -88,5 +103,19 @@ public class Knight: MonoBehaviour, IDamageable
             rb.velocity = Vector3.zero;
         }
     }
+
+    void FindPath()
+    {
+        if(NavMesh.CalculatePath(transform.position, player.transform.position, NavMesh.AllAreas, path))
+        {
+            lastPos = transform.position;
+            nextPos = new Vector3(path.corners[1].x, transform.position.y, path.corners[1].z);
+        }
+        else
+        {
+            inputDir = Vector3.zero;
+        }
+    }
+
 }
 
