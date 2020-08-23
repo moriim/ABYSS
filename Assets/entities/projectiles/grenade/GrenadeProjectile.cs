@@ -13,7 +13,7 @@ public class GrenadeProjectile : MonoBehaviour
 
     void Awake()
     {
-        Destroy(this.gameObject, 2.5f);
+        StartCoroutine(explode(2.5f));
     }
 
     void FixedUpdate()
@@ -28,15 +28,22 @@ public class GrenadeProjectile : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         rb.velocity = new Vector3( rb.velocity.x * 0.5f, rb.velocity.y, rb.velocity.z * 0.5f);
-        if(other.collider.gameObject.layer == LayerMask.NameToLayer("enemy"))
+        if(other.collider.gameObject.layer == LayerMask.NameToLayer("enemyhurtbox"))
         {
-            GameObject explosion = Instantiate(grenadeExplosion, transform.position, Quaternion.identity);
-            explosion.GetComponent<GrenadeExplosion>().owner = owner;
-            Destroy(this.gameObject);
+            StartCoroutine(explode(0f));
         }
     }
     private void OnTriggerEnter(Collider other)
     {
+        StartCoroutine(explode(0f));
+    }
+
+    IEnumerator explode(float delay)
+    {
+        if(delay > 0)
+        {
+            yield return new WaitForSeconds(delay);
+        }
         GameObject explosion = Instantiate(grenadeExplosion, transform.position, Quaternion.identity);
         explosion.GetComponent<GrenadeExplosion>().owner = owner;
         Destroy(this.gameObject);

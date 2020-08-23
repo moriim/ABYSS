@@ -48,7 +48,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   radius: 2
   forceConstant: 20
-  damageConstant: 25
+  damageConstant: 100
   animationCurve:
     serializedVersion: 2
     m_Curve:

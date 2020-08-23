@@ -62,6 +62,7 @@
      <Compile Include="Assets\entities\projectiles\rocket\RocketExplosion.cs" />
      <Compile Include="Assets\entities\projectiles\rocket\RocketProjectile.cs" />
      <Compile Include="Assets\entities\weapons\IWeapon.cs" />
+     <Compile Include="Assets\entities\weapons\LightningGun.cs" />
      <Compile Include="Assets\entities\weapons\Nailgun.cs" />
      <Compile Include="Assets\entities\weapons\RocketLauncher.cs" />
      <Compile Include="Assets\entities\weapons\WeaponManager.cs" />

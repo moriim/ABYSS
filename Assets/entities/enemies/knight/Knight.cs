@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+
 public class Knight: MonoBehaviour, IDamageable
 {
-    public float health {get; set;} = 1500;
+    public float health {get; set;} = 2000f;
     public GameObject gObj {get; set;}
     public Rigidbody rb;
     public CapsuleCollider col;

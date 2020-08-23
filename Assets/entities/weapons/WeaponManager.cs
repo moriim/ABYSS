@@ -16,6 +16,7 @@ public class WeaponManager : MonoBehaviour
         playerCam = transform.Find("camera").gameObject;
         weapons.Add(transform.Find("camera/weapons/rocketlauncher").GetComponent<IWeapon>());
         weapons.Add(transform.Find("camera/weapons/nailgun").GetComponent<IWeapon>());
+        weapons.Add(transform.Find("camera/weapons/lightninggun").GetComponent<IWeapon>());
         equippedWeaponIndex = startingWeaponIndex;
         equippedWeapon = weapons[equippedWeaponIndex];
         foreach(IWeapon w in weapons)
