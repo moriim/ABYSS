@@ -5,6 +5,7 @@ using UnityEngine;
 public class RocketProjectile : MonoBehaviour
 {
     public GameObject rocketExplosion;
+    public GameObject rocketVis;
     public GameObject owner;
 
     void Awake()

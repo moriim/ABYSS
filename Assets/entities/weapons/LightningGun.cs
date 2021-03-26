@@ -13,6 +13,8 @@ public class LightningGun : MonoBehaviour, IWeapon
     public float secondaryFireDelay {get; set;} = 1.2f;
     public GameObject owner {get; set;}
     public GameObject ownerCam {get; set;}
+    public Transform barrelEndPoint;
+    public MeshRenderer gunModel;
 
     public float lastPrimaryShot {get; set;}
     public float lastSecondaryShot {get; set;}
@@ -38,7 +40,7 @@ public class LightningGun : MonoBehaviour, IWeapon
                            && Time.time > lastSecondaryShot + secondaryFireDelay
                            && !railgunMode)
         {
-            lineRenderer.SetPosition(0, ownerCam.transform.position);
+            lineRenderer.SetPosition(0, barrelEndPoint.position);
             lineRenderer.SetPosition(lineRenderer.positionCount - 1, ownerCam.transform.position + ( ownerCam.transform.forward * 100f));
             if(Physics.Raycast(ownerCam.transform.position, ownerCam.transform.forward, out hitInfo, 100f, enemyMask))
             {
@@ -80,10 +82,12 @@ public class LightningGun : MonoBehaviour, IWeapon
     public void Unequip()
     {
         Debug.Log("Unequipped Lightning Gun");
+        gunModel.enabled = false;
     }
     public void Equip()
     {
         Debug.Log("Equipped Lightning Gun");
+        gunModel.enabled = true;
     }
 
 }

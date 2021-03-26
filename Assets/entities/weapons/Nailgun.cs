@@ -13,6 +13,8 @@ public class Nailgun : MonoBehaviour, IWeapon
     public float secondaryFireDelay {get; set;} = 1.25f;
     public GameObject owner {get; set;}
     public GameObject ownerCam {get; set;}
+    public Transform barrelEndPoint;
+    public MeshRenderer gunModel;
 
     public float lastPrimaryShot {get; set;}
     public float lastSecondaryShot {get; set;}
@@ -35,6 +37,8 @@ public class Nailgun : MonoBehaviour, IWeapon
             GameObject nail = Instantiate(nailPrefab, ownerCam.transform.position + ownerCam.transform.forward, ownerCam.transform.rotation);
             nail.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * projectileSpeed);
             nail.GetComponent<NailProjectile>().owner = owner;
+            nail.GetComponent<NailProjectile>().nailVis.transform.position = barrelEndPoint.position;
+            nail.GetComponent<NailProjectile>().nailVis.transform.rotation = barrelEndPoint.rotation;
             lastPrimaryShot = Time.time; 
         }
     }
@@ -96,10 +100,12 @@ public class Nailgun : MonoBehaviour, IWeapon
     public void Unequip()
     {
         Debug.Log("Unequipped Nailgun");
+        gunModel.enabled = false;
     }
     public void Equip()
     {
         Debug.Log("Equipped Nailgun");
+        gunModel.enabled = true;
     }
 
 }

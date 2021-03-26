@@ -14,6 +14,8 @@ public class RocketLauncher : MonoBehaviour, IWeapon
     public float secondaryFireDelay {get; set;} = 0.8f;
     public GameObject owner {get; set;}
     public GameObject ownerCam {get; set;}
+    public Transform barrelEndPoint;
+    public MeshRenderer gunModel;
 
     public float lastPrimaryShot {get; set;}
     public float lastSecondaryShot {get; set;}
@@ -35,6 +37,8 @@ public class RocketLauncher : MonoBehaviour, IWeapon
             GameObject rocket = Instantiate(rocketPrefab, ownerCam.transform.position + ownerCam.transform.forward, ownerCam.transform.rotation);
             rocket.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * projectileSpeed);
             rocket.GetComponent<RocketProjectile>().owner = owner;
+            rocket.GetComponent<RocketProjectile>().rocketVis.transform.position = barrelEndPoint.position;
+            rocket.GetComponent<RocketProjectile>().rocketVis.transform.rotation = barrelEndPoint.rotation;
             lastPrimaryShot = Time.time;
         }
     }
@@ -59,10 +63,12 @@ public class RocketLauncher : MonoBehaviour, IWeapon
     public void Unequip()
     {
         Debug.Log("Unequipped Rocket Launcher");
+        gunModel.enabled = false;
     }
     public void Equip()
     {
         Debug.Log("Equipped Rocket Launcher");
+        gunModel.enabled = true;
     }
 
 }

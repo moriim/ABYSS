@@ -5,6 +5,7 @@ using UnityEngine;
 public class NailProjectile : MonoBehaviour
 {
     public GameObject nailExplosion;
+    public GameObject nailVis;
     public GameObject owner;
 
     void Awake()

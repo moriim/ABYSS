@@ -27,7 +27,7 @@ public class WeaponManager : MonoBehaviour
     }
     void Start()
     {
-        
+        weapons[equippedWeaponIndex].Equip();
     }
     void Update()
     {

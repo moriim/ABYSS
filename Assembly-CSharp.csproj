@@ -55,6 +55,7 @@
      <Compile Include="Assets\entities\player\Movement.cs" />
      <Compile Include="Assets\entities\player\PlayerInput.cs" />
      <Compile Include="Assets\entities\player\PlayerUI.cs" />
+     <Compile Include="Assets\entities\projectiles\ProjectileLerp.cs" />
      <Compile Include="Assets\entities\projectiles\grenade\GrenadeExplosion.cs" />
      <Compile Include="Assets\entities\projectiles\grenade\GrenadeProjectile.cs" />
      <Compile Include="Assets\entities\projectiles\nail\NailExplosion.cs" />
