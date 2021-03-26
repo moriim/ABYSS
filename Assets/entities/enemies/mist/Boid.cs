@@ -7,7 +7,7 @@ public class Boid : MonoBehaviour, IDamageable {
     BoidSettings settings;
 
     // State
-    public float health {get; set;} = 50f;
+    public float health {get; set;} = 110f;
     public GameObject gObj {get; set;}
     [HideInInspector]
     public Vector3 position;
